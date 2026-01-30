@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BASIC認証パスワード管理ツール</title>
+<style>
+body{
+text-align:center;
+}
+.inner{
+width:90%;
+max-width: 980px;
+margin:0 auto;
+display:block;
+}
+ul,ol{
+padding:0px;
+margin:0px;
+list-style:none;
+}
+h1,h2,h3,h4,h5,h6{
+padding:0px;
+margin:0px;
+}
+p{
+padding:0px;
+margin:0px;
+}
+input{
+padding:0px;
+margin:0px;
+}
+button{
+padding:0px;
+margin:0px;
+}
+img{
+width:100%;
+height:auto;
+}
+.sub-title{
+color:#00a2e8;
+font-weight:bold;
+font-size:14px;
+}
+a{
+text-decoration:none;
+color:black;
+}
+li{list-style:none;}
+input{width:150px;}
+header{
+background:skyblue;
+position:fixed;
+width:100%;
+box-shadow:0 3px 3px rgba(0,0,0,0.16);
+z-index:100;
+top:0;
+left:0;
+padding:10px;
+opacity: 0.7;
+}
+header:hover{opacity:1;}
+.header_inner{
+width:90%;
+margin:0px auto;
+max-width:870px;
+text-align:left;
+display:flex;
+}
+.content{
+margin-top:70px;
+margin:70px auto 0 auto;
+}
+.password{margin:0px;}
+.acount__item{
+text-align:center;
+display:block;
+border:solid 1px black;
+}
+.acount{
+display:flex;
+flex-wrap:wrap;
+margin-bottom:20px;
+}
+.mitsui_number{
+display:flex;
+justify-content:center;
+}
+.mitsui_number1 input{
+width:25px;
+display:flex;
+}
+.mitsui_number2 input{
+width:53px;
+display:flex;
+}
+.okini{
+display:flex;
+justify-content:space-around;
+}
+.youtube{
+display:flex;
+flex-wrap:wrap;
+}
+.youtube-channel{
+border:1px solid #000;
+}
+</style>
+</head>
+<body>
+<header>
+<div class="header_inner">
+<div class="password">
+<div>
+
+<p>google</p>
+<input id="google_address" type="text" value="アカウントID" readonly>
+<button onclick="code_copy(this)">Copy</button>
+</div>
+<div>
+<input id="google_password" type="text" value="パスワード" readonly>
+<button onclick="code_copy(this)">Copy</button>
+</div>
+</div>
+<div>
+<textarea name=" " id="textbox_copy" cols="30" rows="3" placeholder="メモ"></textarea>
+<button onclick="code_copy(this)">Copy</button>
+</div>
+<div style="margin:0;padding:0;font-size:14pt;border:none;background-color:#FFF;text-align:center;">
+<form action="https://search.yahoo.co.jp/search" method="get" target="_blank" style="margin:0;padding:0;width:300px;">
+<p style="margin:0;padding:0;">
+<a href="https://www.yahoo.co.jp/" target="_blank">
+<img src="https://s.yimg.jp/images/search/guide/searchbox/080318/ysearch_logo_85_22.gif" alt="Yahoo!" style="border:none;vertical-align:middle;padding:0;border:0;width:50px;" width="85" height="22"></a><input type="text" name="p" size="28" style="margin:0 3px;width:50%;"><input type="hidden" name="fr" value="yssw"><input type="hidden" name="ei" value="▲▲▲"><input type="submit" value="検索" style="margin:0;padding:0px;width:50px;"></p></form>
+</div>
+</div>
+</header>
+<div class="content inner">
+<div class="acount">
+<div class="acount__item">
+<h3>コミュニティ</h3>
+<ul>
+<li><a href="https://slack.com/intl/ja-jp/" target="_blank" rel="noopener noreferrer">slack(SSO)</a></li>
+</ul>
+</div>
+<div class="acount__item">
+<h3>サービス</h3>
+<ul>
+<li><p><a href="https://live.remo.co/my-events" target="_blank" rel="noopener noreferrer">live-remobr(SSO)</a></p></li>
+</ul>
+</div>
+<div class="acount__item">
+<h3>チャットアプリ</h3>
+<ul>
+<li><a href="https://discord.com/login" target="_blank">Discord</a>
+<div class="password">
+<div>
+<input id="discord_id" type="text" value="アカウントID" readonly>
+<button onclick="code_copy(this)">Copy</button>
+</div>
+<div>
+<input id="discord_password" type="text" value="パスワード" readonly>
+<button onclick="code_copy(this)">Copy</button>
+</div>
+</div></li>
+</ul>
+</div>
+<div class="acount__item">
+<h3>金融</h3>
+<ul>
+<li><a href="https://www.ib2.aozorabank.co.jp/ib/index.do?PT=BS&CCT0080=0398" target="_blank">あおぞら銀行</a>
+<div class="password aozora">
+<div>
+<input id="aozora_id" type="text" value="アカウントID" readonly>
+<button onclick="code_copy(this)">Copy</button>
+</div>
+<div>
+<input id="aozora_password" type="text" value="パスワード" readonly>
+<button onclick="code_copy(this)">Copy</button>
+</div>
+</div></li>
+<li>
+<a href="https://direct.smbc.co.jp/aib/aibgsjsw5001.jsp?_ga=2.249835590.1715170079.1769668929-24030006.1769668929&_gl=1*1xxee4h*_gcl_au*MTI3MjI5MjcxMC4xNzY5NjY4OTI5*_ga*MjQwMzAwMDYuMTc2OTY2ODkyOQ..*_ga_9DML3Z544L*czE3Njk2Njg5MjkkbzEkZzAkdDE3Njk2Njg5MzAkajU5JGwwJGgw" target="_blank">三井住友銀行</a>
+<p>ATM:1958</p>
+<div class="mitsui_number">
+<div class="mitsui_number1">
+<input id="mitsui_number1" type="text" value="000" readonly>
+<button onclick="code_copy(this)">Copy</button>
+</div>
+<div class="mitsui_number2">
+<input id="mitsui_number2" type="text" value="0000000" readonly>
+<button onclick="code_copy(this)">Copy</button>
+</div>
+</div>
+<div>
+<input id="mitsui_password" type="text" value="パスワード" readonly>
+<button onclick="code_copy(this)">Copy</button>
+</div>
+</li>
+<li>
+<a href="https://www.sbifxt.co.jp/login.html" target="_blank" rel="noopener noreferrer">SBI FXトレード</a>
+<div class="password fx">
+<div>
+<input id="fx_id" type="text" value="アカウントID" readonly>
+<button onclick="code_copy(this)">Copy</button>
+</div>
+<div>
+<input id="fx_password" type="text" value="パスワード" readonly>
+<button onclick="code_copy(this)">Copy</button>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="acount__item">
+<h3>クレジット</h3>
+<ul>
+<li>
+<a href="https://www.smbc-card.com/mem/index.jsp" target="_blank">三井住友カード</a>
+<div class="password">
+<div>
+<input id="mitsui_card_id" type="text" value="アカウントID" readonly>
+<button onclick="code_copy(this)">Copy</button>
+</div>
+<div>
+<input id="mitsui_card_password" type="text" value="パスワード" readonly>
+<button onclick="code_copy(this)">Copy</button>
+</div>
+</div>
+</li>
+<li>
+<a href="https://api.saisoncard.co.jp/auth/screen/na/authorize?response_type=code&client_id=ZC001&state=&scope=openid&_gl=1*76av64*_ga*MjA3MDk3NjQ3My4xNzY5NjY5MDk1*_ga_BKKP87CX6T*czE3Njk2NjkwOTUkbzEkZzAkdDE3Njk2NjkxMDMkajUyJGwwJGgw" target="_blank">セゾンカード</a>
+<div class="password">
+<div>
+<input id="saison_id" type="text" value="アカウントID" readonly>
+<button onclick="code_copy(this)">Copy</button>
+</div>
+<div>
+<input id="saison_password" type="text" value="パスワード" readonly>
+<button onclick="code_copy(this)">Copy</button>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="acount__item">
+<h3>SNS</h3>
+<ul>
+<li>
+<a href="https://x.com/i/flow/login" target="_blank">X</a>
+<div class="password">
+<div>
+<input id="twitter_address" type="text" value="アカウントID" readonly>
+<button onclick="code_copy(this)">Copy</button>
+</div>
+<div>
+<input id="twitter_password" type="text" value="パスワード" readonly>
+<button onclick="code_copy(this)">Copy</button>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="acount__item">
+<h3>趣味系サービス</h3>
+<ul>
+<li>
+<a href="https://www.pixiv.net/" target="_blank">pixiv</a>
+<div class="password">
+<div>
+<input id="pixiv_address" type="text" value="アカウントID" readonly>
+<button onclick="code_copy(this)">Copy</button>
+</div>
+<div>
+<input id="pixiv_password" type="text" value="パスワード" readonly>
+<button onclick="code_copy(this)">Copy</button>
+</div>
+</div>
+</li>
+<li>
+<a href="https://auth.services.adobe.com/ja_JP/index.html?callback=https%3A%2F%2Fims-na1.adobelogin.com%2Fims%2Fadobeid%2FAdobeSupport1%2FAdobeID%2Ftoken%3Fredirect_uri%3Dhttps%253A%252F%252Fhelpx.adobe.com%252Fjp%252Fmanage-account%252Fusing%252Faccess-adobe-id-account.html%2523old_hash%253D%2526from_ims%253Dtrue%253Fclient_id%253DAdobeSupport1%2526api%253Dauthorize%2526scope%253DAdobeID%252Copenid%252Cgnav%252Ccreative_cloud%252Cread_organizations%252Cadditional_info.projectedProductContext%252Cadditional_info.roles%252Cpps.read%252Cfirefly_api%252Caccount_cluster.read%26state%3D%257B%2522ac%2522%253A%2522AdobeSupport1%2522%252C%2522jslibver%2522%253A%2522v2-v0.49.0-12-gfb1792a%2522%252C%2522nonce%2522%253A%25223166603385379977%2522%257D%26code_challenge_method%3Dplain%26use_ms_for_expiry%3Dtrue&client_id=AdobeSupport1&scope=AdobeID%2Copenid%2Cgnav%2Ccreative_cloud%2Cread_organizations%2Cadditional_info.projectedProductContext%2Cadditional_info.roles%2Cpps.read%2Cfirefly_api%2Caccount_cluster.read&state=%7B%22ac%22%3A%22AdobeSupport1%22%2C%22jslibver%22%3A%22v2-v0.49.0-12-gfb1792a%22%2C%22nonce%22%3A%223166603385379977%22%7D&relay=0aeaaf3e-c6f2-4cbc-9fbe-eea1bd12dc82&locale=ja_JP&flow_type=token&idp_flow_type=login&ab_test=ie11-incompat&s_p=google%2Cline%2Capple%2Cfacebook%2Cmicrosoft%2Ckakao&response_type=token&code_challenge_method=plain&redirect_uri=https%3A%2F%2Fhelpx.adobe.com%2Fjp%2Fmanage-account%2Fusing%2Faccess-adobe-id-account.html%23old_hash%3D%26from_ims%3Dtrue%3Fclient_id%3DAdobeSupport1%26api%3Dauthorize%26scope%3DAdobeID%2Copenid%2Cgnav%2Ccreative_cloud%2Cread_organizations%2Cadditional_info.projectedProductContext%2Cadditional_info.roles%2Cpps.read%2Cfirefly_api%2Caccount_cluster.read&use_ms_for_expiry=true#/" target="_blank">Adobe</a>
+<div class="password">
+<div>
+<input id="adobe_id" type="text" value="アカウントID" readonly>
+<button onclick="code_copy(this)">Copy</button>
+</div>
+<div>
+<input id="adobe_password" type="text" value="パスワード" readonly>
+<button onclick="code_copy(this)">Copy</button>
+</div>
+</div>
+</li>
+<li>
+<a href="https://accounts.clip-studio.com/login?forward=%2Faccount%2Fedit%3Fui_locales%3Dja-jp&ui_locales=ja-jp&redirect_token=YxzQzlGOOrHVV6qyRSb1oAOWIhBOVrMOzFWKKnof" target="_blank">クリップスタジオ</a>
+<div class="password">
+<div>
+<input id="kurisuta_id" type="text" value="アカウントID" readonly>
+<button onclick="code_copy(this)">Copy</button>
+</div>
+<div>
+<input id="kurisuta_password" type="text" value="パスワード" readonly>
+<button onclick="code_copy(this)">Copy</button>
+</div>
+</div>
+</li>
+<li>
+<a href="https://account.wacom.com/ja-jp/sign-in" target="_blank" rel="noopener noreferrer">wacom</a>
+<div class="password">
+<div>
+<input id="wacom_id" type="text" value="アカウントID" readonly>
+<button onclick="code_copy(this)">Copy</button>
+</div>
+<div>
+<input id="wacom_password" type="text" value="パスワード" readonly>
+<button onclick="code_copy(this)">Copy</button>
+</div>
+</div>
+</li>
+
+</ul>
+</div>
+<div class="acount__item">
+<h3>その他</h3>
+<ul>
+<li>
+<a href="https://account.microsoft.com/account?lang=ja-jp" target="_blank">Microsoft</a>
+<div class="password">
+<div>
+<input id="microsoft_address" type="text" value="アカウントID" readonly>
+<button onclick="code_copy(this)">Copy</button>
+</div>
+<div>
+<input id="microsoft_password" type="text" value="パスワード" readonly>
+<button onclick="code_copy(this)">Copy</button>
+</div>
+</div>
+</li>
+<li>
+<a href="https://www.icloud.com/" target="_blank">Apple</a>
+<p style="color:red;font-size:12px;">※AppleIDは一度削除すると<br>二度と使えなくなるので注意する</p>
+<div class="password">
+<div>
+<input id="apple_address" type="text" value="アカウントID" readonly>
+<button onclick="code_copy(this)">Copy</button>
+</div>
+<div>
+<input id="apple_password" type="text" value="パスワード" readonly>
+<button onclick="code_copy(this)">Copy</button>
+</div>
+</div>
+</li>
+
+</ul>
+</div>
+</div>
+
+</div><!-- content inner -->
+<script>
+function code_copy(buttonElement){
+// 押されたボタンの直前にある input 要素を取得
+var copyTarget=buttonElement.previousElementSibling;
+copyTarget.select();
+document.execCommand("Copy");
+// (任意) コピーされたことをユーザーに伝える
+// alert("コピーしました: " + copyTarget.value);
+}
+</script>
+</body>
+</html>
